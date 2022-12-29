@@ -17,8 +17,12 @@ html
           button.btn.nav-icon(type:button)
             img.nav-icon-img(src='./images/icons/icons8-spotify-30.svg')
             span.text-white 音樂
-          button.border-0.bg-transparent.ms-3#togglePlay(type:button)
+          button.border-0.bg-transparent.ms-4#previous(type:button)
+            img.nav-icon-img(src='./images/icons/first.svg')
+          button.border-0.bg-transparent.ms-1#togglePlay(type:button)
             img.nav-icon-img#play(src='./images/icons/icons8-play-button-circled.svg')
+          button.border-0.bg-transparent.ms-1#next(type:button)
+            img.nav-icon-img(src='./images/icons/last.svg')
 
         //- App funcs.
         .col.d-flex.justify-content-end

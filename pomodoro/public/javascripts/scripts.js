@@ -1,5 +1,5 @@
 window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = 'BQAWK6-yEVwL0bTN_jkiYNI6FwFE1gzZM5VnkcU19-H9kZTTlsZFBt2g9_Y1Yz4ezBZGSfeG5DLsGSUIoH6IcqTGWVmSM39-CU03AttJBdjd93C5rxdPSUOUUvqgO5DZPr1SA92zyZJ6DSRUlTmBZXjb22ENUunHmujLRQEu4L7mZtL4Id8xNAwlCNIlTrYkkBiMBmUHiktDL6RDCOsjcYQzWQM';
+    const token = 'BQCAk27lBd64HVIdUpsKXrQ12bf2-g_6bsQlQxSFtFGLk09Dm-4f19ME9U9KOwPqig6gsN_jFlXtKYjf2tM-tLauNEG0eUvQezyBBkzakC5N2rJllOn4vRSwlaIX_WKl0-zPkG_4ihuUg9WujQY9-5DaMYSM2u5mAkYg8593w0fMnNxqOyu9M2rom6Q5W0eTZ6yqJ0F8UsBKIRJ3qPoDpKCIWaQ';
     const player = new Spotify.Player({
       name: 'Web Playback SDK Quick Start Player',
       getOAuthToken: cb => { cb(token); },
@@ -32,6 +32,20 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         console.log('Autoplay is not allowed by the browser autoplay rules');
     });
 
+    // Get playing status
+    // player.getCurrentState().then(state => {
+    //     if (!state) {
+    //       console.error('User is not playing music through the Web Playback SDK');
+    //       return;
+    //     }
+      
+    //     var current_track = state.track_window.current_track;
+    //     var next_track = state.track_window.next_tracks[0];
+      
+    //     console.log('Currently Playing', current_track);
+    //     console.log('Playing Next', next_track);
+    //   });
+
     // Play toggle
     document.getElementById('togglePlay').onclick = function() {
         player.togglePlay().then(() => {
@@ -40,11 +54,22 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             '/images/icons/pause.svg' : '/images/icons/icons8-play-button-circled.svg';
         });
     };
+    
+    // Play previous song
+    document.getElementById('previous').onclick = function(){
+        player.previousTrack().then(() => {
+            console.log('Set to previous track!');
+          });
+    }
 
     // Play next song
-    player.nextTrack().then(() => {
-        console.log('Skipped to next track!');
-    });
+    document.getElementById('next').onclick = function(){
+        player.nextTrack().then(() => {
+            console.log('Skipped to next track!');
+        });
+    }
+
+    
 
     // document.getElementById('auth').onclick = function() {
     //     player.activateElement();
