@@ -9,4 +9,26 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     .container
+      .nav.row
+        .col.d-flex
+          h1.fw-bold.me-4.mb-0.text-white|PomoClock
+
+          //- Spotify player
+          button.btn.nav-icon(type:button)
+            img.nav-icon-img(src='./images/icons/icons8-spotify-30.svg')
+            span.text-white 音樂
+          button.border-0.bg-transparent.ms-3#togglePlay(type:button)
+            img.nav-icon-img#play(src='./images/icons/icons8-play-button-circled.svg')
+
+        //- App funcs.
+        .col.d-flex.justify-content-end
+          a.btn.nav-icon.mx-2(href="")
+            img.nav-icon-img(src="./images/icons/icons8-ookla-speedtest-30.svg")
+            span.text-white 成就
+          a.btn.nav-icon.mx-2(href="")
+            img.nav-icon-img(src="./images/icons/friends.svg")
+            span.text-white 好友
+          a.btn.nav-icon.mx-2(href="")
+            img.nav-icon-img(src="./images/icons/user.svg")
+            span.text-white 帳號
       block content
