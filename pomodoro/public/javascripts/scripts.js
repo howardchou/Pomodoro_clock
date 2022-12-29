@@ -1,5 +1,5 @@
 window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = 'BQD6mk-0_ftgITk7KQ70XvGH8tiAKemzZILlyzfzp2LY1x7Jri3lYZooyY8_S8-iCqldIAhJbzJYY1kHL_IXZHZJzhE9hWEGL7KjQN3BvF0Ytreygra9wXvaw2yXj5eOyYbAaVOmXDLoS3fVLVQt_79mpwiLr2FpqFyxoHRRmjhZ7JPRr92xELeQs9Fn--hGVQdabzfsXRTtyWcySnCqxPguU2c';
+    const token = 'BQAjOztlLSp5l47k2f9SwDPMwmlBdtcWPE1mphKe9NM4m_8b6jZDN348zO37PCcpa1awe3yyIqfa_X_urTgOkGP6S6s3Vl8BvBX6lSXO04YEgw61uzXZW9A2-mDdPIltjzTl2fUq9E5xW7gRtcKPlbjIAFc6F_1DEuk2zem2Qa4aU9BQhI_6MTkNjxX_-EDGUWiC0HaPhMzD51FQK3SbAdBGajU';
     const player = new Spotify.Player({
       name: 'Web Playback SDK Quick Start Player',
       getOAuthToken: cb => { cb(token); },
@@ -36,8 +36,15 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     document.getElementById('togglePlay').onclick = function() {
         player.togglePlay().then(() => {
             console.log('Toggled playback!');
+            document.getElementById('play').src = document.getElementById('play').src == 'http://127.0.0.1:3000/images/icons/icons8-play-button-circled.svg' ?
+            '/images/icons/pause.svg' : '/images/icons/icons8-play-button-circled.svg';
         });
     };
+
+    // Play next song
+    player.nextTrack().then(() => {
+        console.log('Skipped to next track!');
+    });
 
     // document.getElementById('auth').onclick = function() {
     //     player.activateElement();
