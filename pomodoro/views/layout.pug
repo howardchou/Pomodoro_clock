@@ -14,14 +14,14 @@ html
           h1.fw-bold.me-4.mb-0.text-white|PomoClock
 
           //- Spotify player
-          button.btn.nav-icon(type:button)
-            img.nav-icon-img(src='./images/icons/icons8-spotify-30.svg')
-            span.text-white 音樂
+          button.btn.nav-icon(type:button, style="width: 130px")
+            img#album.nav-icon-img(src='./images/icons/icons8-spotify-30.svg')
+            span#playing-name.text-white 音樂
           button.border-0.bg-transparent.ms-4#previous(type:button)
             img.nav-icon-img(src='./images/icons/first.svg')
-          button.border-0.bg-transparent.ms-1#togglePlay(type:button)
+          button.border-0.bg-transparent#togglePlay(type:button)
             img.nav-icon-img#play(src='./images/icons/icons8-play-button-circled.svg')
-          button.border-0.bg-transparent.ms-1#next(type:button)
+          button.border-0.bg-transparent#next(type:button)
             img.nav-icon-img(src='./images/icons/last.svg')
 
         //- App funcs.
