@@ -22,6 +22,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+var querystring = require('querystring');
+
+///Spotify Login
+// Random character generator
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function generateRandomString(length){
+  const charactersLength = characters.length;
+  let result = '';
+  for(let i = 0; i< length; i++){
+    result += characters[Math.floor(Math.random()*charactersLength)];
+  }
+}
+// App client id
+const client_id = '2e351bd6e1264b15a8feef4f9f944a3c';
+// After auth or access denied, redirect to index page
+var redirect_uri = 'http://127.0.0.1:3000/';
+
+app.get('/login', function(req, res) {
+
+  var state = generateRandomString(16);
+  var scope = 'user-read-private user-read-email';
+
+  res.redirect('https://accounts.spotify.com/authorize?' +
+    querystring.stringify({
+      response_type: 'code',
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri,
+      state: state
+    }));
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

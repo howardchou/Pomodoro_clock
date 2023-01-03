@@ -37,14 +37,14 @@ function getCurrentState(player, which){
                 break;
         }
         
-        console.log(state.track_window);
-        console.log('Currently Playing', current_track);
-        console.log('Playing Next', next_track);
+        // console.log(state.track_window);
+        // console.log('Currently Playing', current_track);
+        // console.log('Playing Next', next_track);
     });
 }
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = 'BQAmh8zg5PC_Se35lLCy0o57yFN7DgJ3PmGTaFZ9L2ltfGHeu_L8a1ZydQhlq579zF5WhUaS6pbpzR8kbWI1_fKP_7j26it9BiFUraD8Hl5NHbj05SPIZnLN5WVdWeQtQyJKNIW0Nt4CDGCsxOwok7M_ViGnkFWutfF3owHmVFU4711XpAn8Zx-qbnoQTGfiP52D3SOYNoG1p-oSL0fHmkoomJ8';
+    const token = 'BQDp1gWxtqNVVUjuFf1GNARO7wNx8LaDhbxLONrTxZh4hsTJOmitdinh0CSryo9oCNR4u1MKR-kQf7pHkiQX7qNwaNweNbkLic8MEPixZcRv5GrT9fFKX8sYRJyMZVBSPTsIJ8V9ZCUaT-W7L7cuVPd-76BYYrjnGN0pzmZjeOP9Ry5GEEu7raTDP2hMGJWXCnvGvTGGGvgf1ZbXENGv19TUEGg';
     const player = new Spotify.Player({
       name: 'Web Playback SDK Quick Start Player',
       getOAuthToken: cb => { cb(token); },
