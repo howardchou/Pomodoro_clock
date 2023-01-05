@@ -20,6 +20,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+app.use(session({
+  name: 'mySessionID',
+  secret: process.env.sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+
+  store: mongoStore.create({
+    mongoUrl: process.env.mongodbUrl,
+    collection: 'sessions',
+    ttl: 24 * 60 * 60
+  })
+}))
+
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/session', sessionRouter);

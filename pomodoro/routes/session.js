@@ -1,32 +1,35 @@
 const express = require("express");
 const router = express.Router();
+const memberModel = require("../model/member");
+const bcrypt = require("bcrypt");
+
 
 router.get("/login", (req, res) => {
     res.render('login', { title: 'session login登入' })
 });
 
 router.post("/login", async (req, res) => {
-    const{email,pw}=req.body;
+    const { email, pw } = req.body;
     console.log(email);
-    const member=await memberModel.findOne({email});
-    if(!member){
+    const member = await memberModel.findOne({ email });
+    if (!member) {
         console.log("member not found!!");
         return res.redirect("login")
     }
-    const verifyPW=await bcrypt.compare(pw,member.pw);
-    if(!verifyPW){
+    const verifyPW = await bcrypt.compare(pw, member.pw);
+    if (!verifyPW) {
         console.log("PW is incorrect!!");
         return res.redirect("login");
     }
-    req.session.isAuth=true;
-    req.session.name=member.id;
+    req.session.isAuth = true;
+    req.session.name = member.id;
     res.redirect("member");
 });
 
 router.get("/register", (req, res) => {
     res.render('register', { title: 'session register註冊' })
 });
-router.post("/register", async(req, res) => {
+router.post("/register", async (req, res) => {
     const { id, email, pw } = req.body;
     if (!id || !email || !pw) {
         console.log("no data", id, email, pw);

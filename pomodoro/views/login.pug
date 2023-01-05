@@ -3,7 +3,7 @@ extends layout
 
 block content
     div.text-center.mt-5
-        form(class="form-signin" method="post" action="/login" style="max-width:480px;margin:auto")
+        form(class="form-signin" method="post" action="/session/login" style="max-width:480px;margin:auto")
             h1(class=h1Classes)
                 label( for="account" class="sr-only") 帳號
                 input(type="text" id="id" class="form-control mb-3" placeholder="ID" name="email" required autofocus)
