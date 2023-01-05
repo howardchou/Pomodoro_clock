@@ -44,9 +44,9 @@ function getCurrentState(player, which){
 }
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = 'BQDp1gWxtqNVVUjuFf1GNARO7wNx8LaDhbxLONrTxZh4hsTJOmitdinh0CSryo9oCNR4u1MKR-kQf7pHkiQX7qNwaNweNbkLic8MEPixZcRv5GrT9fFKX8sYRJyMZVBSPTsIJ8V9ZCUaT-W7L7cuVPd-76BYYrjnGN0pzmZjeOP9Ry5GEEu7raTDP2hMGJWXCnvGvTGGGvgf1ZbXENGv19TUEGg';
+    const token = app.access_token;
     const player = new Spotify.Player({
-      name: 'Web Playback SDK Quick Start Player',
+      name: 'Kevin',
       getOAuthToken: cb => { cb(token); },
       volume: 0.5
     });
