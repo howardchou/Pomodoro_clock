@@ -3,12 +3,24 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+const mongoStore = require('connect-mongo')
+const session = require('express-session');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var sessionRouter = require('./routes/session');
 
 var app = express();
+
+//連線
+mongoose.set("strictQuery", false);
+//mongoose.connect('mongodb://127.0.0.1:27017/sessions');
+mongoose.connect(process.env.mongodbUrl);
+const db = mongoose.connection;
+db.on('error', (error) => console.error('連線發生問題', error));
+db.on('open', () => { console.log('DB連線成功') });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -47,6 +47,10 @@ router.post("/register", async (req, res) => {
     const result = await member.save();
     res.redirect("login")
 });
+const isAuth = (req, res, next) => {
+    if (!req.session.isAuth) return res.redirect("login");
+    next();
+};
 
 
 
