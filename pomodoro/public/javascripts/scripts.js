@@ -43,8 +43,27 @@ function getCurrentState(player, which){
     });
 }
 
+// Get cookie 
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      // Find cookie name
+      if (c.indexOf(name) == 0) {
+        // Return cookie value
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
 window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = app.access_token;
+    const token = getCookie('spotify-access-tockon');
     const player = new Spotify.Player({
       name: 'Kevin',
       getOAuthToken: cb => { cb(token); },

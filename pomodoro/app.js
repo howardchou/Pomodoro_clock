@@ -7,6 +7,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Using session
 const session = require("express-session");
 
 var indexRouter = require('./routes/index');
@@ -96,26 +97,29 @@ app.get('/spotify/callback', function(req, res){
       if (!error && response.statusCode === 200) {
     
         access_token = body.access_token;
-        console.log(access_token);
-        console.log(body);
+        res.cookie('spotify-access-tockon', access_token, {maxAge: 3600, httpOnly: true});
+        res.redirect('/');
+        // console.log(access_token);
+        // console.log(body);
+        var options = {
+          url: 'https://api.spotify.com/v1/users/me',
+          headers: {
+            'Authorization': 'Bearer ' + access_token
+          },
+          json: true
+        };
+
         // use the access token to access the Spotify Web API
-        // var options = {
-        //   url: 'https://api.spotify.com/v1/users/jmperezperez',
-        //   headers: {
-        //     'Authorization': 'Bearer ' + token
-        //   },
-        //   json: true
-        // };
-        // request.get(options, function(error, response, body) {
-        //   console.log(body);
-        // });
+        request.get(options, function(error, response, body) {
+          console.log(body);
+        });
       }
     });
   }
 });
 
 // Refresh the access token
-app.get('/refresh_token', function(req, res) {
+app.get('/spotify/refresh_token', function(req, res) {
 
   var refresh_token = req.query.refresh_token;
   var authOptions = {
@@ -132,9 +136,8 @@ app.get('/refresh_token', function(req, res) {
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       access_token = body.access_token;
-      res.send({
-        'access_token': access_token
-      });
+      res.cookie('spotify-access-tockon', access_token, {maxAge: 3600, httpOnly: true});
+      res.redirect('/');
     }
   });
 });
