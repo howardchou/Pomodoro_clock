@@ -33,33 +33,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const url = 'mongodb://localhost:27017/PomoClock';
-mongoose.connect(url, {
-  useNewUrlParser: true, useCreateIndex: true,
-  useUnifiedTopology: true, useFindAndModify: true
-});
-const connection = mongoose.connection;
+const url = process.env.MONGODB_URL;
 
 
-let store = new MongoStore({
-  mongoUrl: 'mongodb://localhost:27017/PomoClock',
-  collection: "PomoClock"
-});
-
-// app.use(session({
-//   secret: process.env.COOKIE_SECRET,
-//   resave: false,
-//   store: store,
-//   saveUninitialized: false,
-//   cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
-// }));
 app.use(session(
   {
     secret: 'my Secret',
     resave: false,
     saveUninitialized: false,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
     store: MongoStore.create({
-      mongoUrl: 'mongodb://localhost:27017/PomoClock'
+      mongoUrl: process.env.mongodbUrl,
+      collection: 'PomoClock',
+      ttl: 24 * 60 * 60
     })
   }))
 
