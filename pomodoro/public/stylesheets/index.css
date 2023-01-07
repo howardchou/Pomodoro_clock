@@ -18,10 +18,13 @@ body {
     background-color: var(--color-primary);
     font-size: 1.6rem; */
 }
-#work, #break{
+
+#work,
+#break {
     font-size: 2rem;
-    margin-bottom:0.5rem
+    margin-bottom: 0.5rem
 }
+
 p,
 i,
 h1 {
@@ -134,4 +137,11 @@ section {
 
 .controls #reset {
     display: none;
+}
+
+#btn {
+    background-color: #f37157;
+    font-size: 2rem;
+    color: #FBEFFE;
+    border-radius: 12px;
 }

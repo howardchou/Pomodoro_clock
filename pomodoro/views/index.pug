@@ -25,10 +25,10 @@ block content
             p :
             p#seconds 00
       .controls
-        button#start(onclick='countdownToggle()')
-          i.fa-solid.fa-play
+        button.btn#btn(type='button' onclick='countdownToggle()') Start
         a#reset(href='/')
           i.fa-solid.fa-rotate-right
+    
   // SCRIPT
   script(src='/javascripts/index.js')
 
