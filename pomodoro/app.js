@@ -3,10 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require("dotenv").config();
 const mongoose = require('mongoose');
-const session = require('express-session');
 const mongoStore = require('connect-mongo')
-
+const session = require('express-session');
 
 
 var indexRouter = require('./routes/index');
@@ -34,17 +34,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session(
-  {
-    secret: 'my Secret',
-    resave: false,
-    saveUninitialized: false,
-    store: new mongoStore({
-      client: db,
-      collection: 'PomoClock',
-      ttl: 24 * 60 * 60
-    })
-  }));
+app.use(session({
+  name: 'mySessionID',
+  secret: process.env.sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+
+  store: mongoStore.create({
+    mongoUrl: process.env.mongodbUrl,
+    collection: 'PomoClock',
+    ttl: 24 * 60 * 60
+  })
+}))
 
 
 app.use('/', indexRouter);
