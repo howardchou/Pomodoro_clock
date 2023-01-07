@@ -51,7 +51,7 @@ var access_token = null;
 // After auth or access denied, redirect to index page
 var redirect_uri = 'http://127.0.0.1:3000/spotify/callback';
 
-// Direct to login page
+// Direct to login page and get code
 app.get('/spotify/login', function(req, res) {
 
   var state = generateRandomString(16);
@@ -93,16 +93,18 @@ app.get('/spotify/callback', function(req, res){
       },
       json: true
     };
+
     request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
-    
+        // Get an access token
         access_token = body.access_token;
-        res.cookie('spotify-access-tockon', access_token, {maxAge: 3600, httpOnly: true});
+        // Save token in cookie
+        res.cookie('spotify-access-token', access_token, {maxAge: 3600, httpOnly: true});
         res.redirect('/');
         // console.log(access_token);
         // console.log(body);
         var options = {
-          url: 'https://api.spotify.com/v1/users/me',
+          url: 'https://api.spotify.com/v1/me',
           headers: {
             'Authorization': 'Bearer ' + access_token
           },
@@ -136,7 +138,7 @@ app.get('/spotify/refresh_token', function(req, res) {
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       access_token = body.access_token;
-      res.cookie('spotify-access-tockon', access_token, {maxAge: 3600, httpOnly: true});
+      res.cookie('spotify-access-token', access_token, {maxAge: 3600, httpOnly: true});
       res.redirect('/');
     }
   });
