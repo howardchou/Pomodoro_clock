@@ -1,21 +1,22 @@
 body {
-  padding: 50px;
-  padding-top: 30px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #CD533B;
+    padding: 50px;
+    padding-top: 30px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #CD533B;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }
 
-.text-white{
-  color: #FBEFFE
+.text-white {
+    color: #FBEFFE
 }
 
-.nav-icon-img{
-  width: 30px;
+.nav-icon-img {
+    width: 30px;
 }
-.nav-icon{
-  background-color: #FBFFFE65
+
+.nav-icon {
+    background-color: #FBFFFE65
 }

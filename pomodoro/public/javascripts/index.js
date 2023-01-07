@@ -86,16 +86,17 @@ function countdownToggle() {
         start();
         isStart = !isStart;
         isPaused = !isPaused; //第一次Pause false=>true
+        document.body.style.backgroundColor = '#c4604d';
     }
     isPaused = !isPaused;
     if (isPaused) {
         document.getElementById('btn').innerHTML = "Start";
-
+        document.body.style.backgroundColor = '#CD533B';
         // isPaused = !isPaused; //第一次Pause false=>true
     }
     if (!isPaused) {
         document.getElementById('btn').innerHTML = "Pause";
-
+        document.body.style.backgroundColor = '#c4604d';
         // isPaused = !isPaused; //第一次Pause false=>true
     }
 
