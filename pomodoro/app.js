@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const mongoStore = require('connect-mongo')
+const mongoStore = require('connect-mongo').default;
 const session = require('express-session');
 
 
@@ -32,22 +32,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const url = 'mongodb://localhost:27017/PomoClock';
+mongoose.connect(url, {
+  useNewUrlParser: true, useCreateIndex: true,
+  useUnifiedTopology: true, useFindAndModify: true
+});
+const connection = mongoose.connection;
 
+
+let store = new MongoStore({
+  mongoUrl: url,
+  collection: "sessions"
+});
 
 app.use(session({
-  name: 'mySessionID',
-  secret: process.env.sessionSecret,
+  secret: process.env.COOKIE_SECRET,
   resave: false,
+  store: store,
   saveUninitialized: false,
-
-  store: mongoStore.create({
-    mongoUrl: process.env.mongodbUrl,
-    collection: 'sessions',
-    ttl: 24 * 60 * 60
-  })
-}))
-
-
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
