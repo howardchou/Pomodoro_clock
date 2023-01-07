@@ -3,25 +3,29 @@ let breakTittle = document.getElementById('break');
 
 let workTime = 1;
 let breakTime = 1;
-let isPaused=false;
-let isStart = false;
+let isPaused = false;
+let isStart = true;
 let seconds = "00"
 
-// display
+// 顯示
 window.onload = () => {
-    
+
     document.getElementById('minutes').innerHTML = workTime;
     document.getElementById('seconds').innerHTML = seconds;
 
     workTittle.classList.add('active');
 }
 
-// start timer
+// 啟動
 function start() {
+    console.log("start");
     // change button
-    // document.getElementById('start').style.display = "none";
-    // document.getElementById('reset').style.display = "block";
-    
+    document.getElementById("start").classList.add("fa-solid.fa-pause");
+    // 2. Remove a class
+    document.getElementById("start").classList.remove("fa-solid.fa-play");
+    // 3. Overwrite the classList
+    document.getElementById("start").classList = ("fa-solid.fa-pause");
+
 
 
     // change the time
@@ -34,6 +38,7 @@ function start() {
 
     // countdown
     let timerFunction = () => {
+        console.log("timerFunction");
         //change the display
         document.getElementById('minutes').innerHTML = workMinutes;
         document.getElementById('seconds').innerHTML = seconds;
@@ -70,7 +75,8 @@ function start() {
     // setInterval(timerFunction, 1000); // 1000 = 1s
 
     setInterval(function() {
-        if(!isPaused) {
+        console.log("setInterval" + isPaused);
+        if (!isPaused) {
             timerFunction();
         }
     }, 1000);
@@ -81,12 +87,16 @@ function start() {
     //     isPaused = true;
     // }
 }
-function countdownToggle(){
-    if(!isStart){
+
+function countdownToggle() {
+    console.log("countdownToggle 1" + isPaused);
+    if (isStart) {
         start();
-        isStart =! isStart;
-        isPaused =! isPaused;
+        isStart = !isStart;
+        isPaused = !isPaused; //第一次Pause false=>true
     }
-    isPaused =! isPaused;
+    isPaused = !isPaused;
+    console.log("countdownToggle 2" + isPaused);
+
     // start();
 }
