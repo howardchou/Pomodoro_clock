@@ -4,8 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const mongoStore = require('connect-mongo').default;
-const session = require('express-session');
+var session = require('express-session');
+var MongoStore = require('connect-mongo');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 var indexRouter = require('./routes/index');
@@ -41,17 +42,27 @@ const connection = mongoose.connection;
 
 
 let store = new MongoStore({
-  mongoUrl: url,
-  collection: "sessions"
+  mongoUrl: 'mongodb://localhost:27017/PomoClock',
+  collection: "PomoClock"
 });
 
-app.use(session({
-  secret: process.env.COOKIE_SECRET,
-  resave: false,
-  store: store,
-  saveUninitialized: false,
-  cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
-}));
+// app.use(session({
+//   secret: process.env.COOKIE_SECRET,
+//   resave: false,
+//   store: store,
+//   saveUninitialized: false,
+//   cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
+// }));
+app.use(session(
+  {
+    secret: 'my Secret',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: 'mongodb://localhost:27017/PomoClock'
+    })
+  }))
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
