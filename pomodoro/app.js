@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 var session = require('express-session');
+const MongoClient = require('mongodb').MongoClient;
 var MongoStore = require('connect-mongo');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -18,7 +19,11 @@ var app = express();
 //連線
 mongoose.set("strictQuery", false);
 //mongoose.connect('mongodb://127.0.0.1:27017/sessions');
-mongoose.connect(process.env.mongodbUrl);
+mongoose.connect(process.env.mongodbUrl,{
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+});
+
 const db = mongoose.connection;
 db.on('error', (error) => console.error('連線發生問題', error));
 db.on('open', () => { console.log('DB連線成功') });
@@ -33,9 +38,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const url = process.env.MONGODB_URL;
-
-
 app.use(session(
   {
     secret: 'my Secret',
@@ -46,7 +48,7 @@ app.use(session(
     useNewUrlParser: true,
     useUnifiedTopology: true,
     store: MongoStore.create({
-      mongoUrl: process.env.mongodbUrl,
+      client:db,
       collection: 'PomoClock',
       ttl: 24 * 60 * 60
     })
