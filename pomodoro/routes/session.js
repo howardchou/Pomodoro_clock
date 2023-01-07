@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 
 
 router.get("/login", (req, res) => {
-    res.render('login', { title: 'session login登入' })
+    res.render('login', { title: 'login' })
 });
 
 router.post("/login", async (req, res) => {
@@ -27,7 +27,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-    res.render('register', { title: 'session register註冊' })
+    res.render('register', { title: 'register' })
 });
 router.post("/register", async (req, res) => {
     const { id, email, pw } = req.body;
