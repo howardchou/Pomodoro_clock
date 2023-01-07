@@ -14,6 +14,8 @@ var usersRouter = require('./routes/users');
 var sessionRouter = require('./routes/session');
 var friendRouter = require('./routes/friend');
 
+var accountRouter = require('./routes/account');
+
 var app = express();
 
 //連線
@@ -53,6 +55,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/session', sessionRouter);
 app.use('/friend', friendRouter);
+app.use('/account', accountRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
