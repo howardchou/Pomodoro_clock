@@ -10,4 +10,6 @@ block content
                 label(for="password" class="sr-only") 密碼
                 input(type="password" id="pw" class="form-control" placeholder="Password" name="pw" required autofocus)
             div.mt-3
-                button(class="btn btn-lg btn-outline-primary btn-block" type="submit" id="login") 登入
+                button.btn.nav-icon(class="btn btn-lg btn-outline-primary btn-block" type="submit" id="login") 登入
+        form(class="form-signin" method="get" action="/session/register" style="max-width:480px;margin:auto")
+            button.btn.nav-icon(class="btn btn-lg btn-outline-primary btn-block" type="submit") 註冊

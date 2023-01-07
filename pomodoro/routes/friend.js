@@ -3,7 +3,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('', function (req, res, next) {
-    res.render('friend', { title: 'Friend' });
+    if(req.session.isAuth){
+        res.render('friend', { title: 'Friend' });
+    }else{
+        res.render('login');
+    }
+    // res.render('friend', { title: 'Friend' });
 });
 
 router.get("/search/:query", async (req, res)=> {
