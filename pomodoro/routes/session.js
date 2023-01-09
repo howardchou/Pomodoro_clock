@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
     }
     req.session.isAuth = true;
     req.session.name = member.id;
-    res.redirect("/account");
+    res.redirect("/");
 });
 
 router.get("/register", (req, res) => {
