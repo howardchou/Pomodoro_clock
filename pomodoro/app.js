@@ -5,10 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require("dotenv").config();
 const mongoose = require('mongoose');
-const mongoStore = require('connect-mongo')
+const mongoStore = require('connect-mongo');
 const session = require('express-session');
 
 
+var apiRouter = require('./routes/api');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var sessionRouter = require('./routes/session');
@@ -38,38 +39,38 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  name: 'mySessionID',
-  secret: process.env.sessionSecret,
-  resave: false,
-  saveUninitialized: false,
+    name: 'mySessionID',
+    secret: process.env.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
 
-  store: mongoStore.create({
-    mongoUrl: process.env.mongodbUrl,
-    collection: 'PomoClock',
-    ttl: 24 * 60 * 60
-  })
+    store: mongoStore.create({
+        mongoUrl: process.env.mongodbUrl,
+        collection: 'PomoClock',
+        ttl: 24 * 60 * 60
+    })
 }))
 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/session', sessionRouter);
+app.use('/api', apiRouter);
 app.use('/friend', friendRouter);
 app.use('/account', accountRouter);
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function(req, res, next) {
+    next(createError(404));
 });
-
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

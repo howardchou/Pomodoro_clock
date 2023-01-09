@@ -6,10 +6,10 @@ block content
         form(class="form-signin" method="post" action="/session/login" style="max-width:480px;margin:auto")
             h1(class=h1Classes)
                 label( for="account" class="sr-only") 信箱
-                input(type="text" id="id" class="form-control mb-3" placeholder="Email" name="email" required autofocus)
+                input(type="text" id="id" class="form-control mb-3" placeholder="Email" name="email" )
                 label(for="password" class="sr-only") 密碼
-                input(type="password" id="pw" class="form-control" placeholder="Password" name="pw" required autofocus)
+                input(type="password" id="pw" class="form-control" placeholder="Password" name="pw")
             div.mt-3
                 button.btn.nav-icon(class="btn btn-lg btn-outline-primary btn-block" type="submit" id="login") 登入
-                form(class="form-signin" method="get" action="/session/register" style="max-width:480px;margin:auto")
+        form(class="form-signin" method="get" action="/session/register" style="max-width:480px;margin:auto")
                     button.btn.nav-icon(class="btn btn-lg btn-outline-primary btn-block" type="submit") 註冊

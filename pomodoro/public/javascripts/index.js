@@ -2,7 +2,7 @@ let workTittle = document.getElementById('work');
 let breakTittle = document.getElementById('break');
 
 let workTime = 25;
-let breakTime = 5   ;
+let breakTime = 5;
 let isPaused = false;
 let isStart = false;
 let seconds = "00"
