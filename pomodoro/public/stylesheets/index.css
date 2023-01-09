@@ -145,3 +145,15 @@ section {
     color: #FBEFFE;
     border-radius: 12px;
 }
+
+#addbtn {
+    background-color: #f37157;
+    font-size: 1rem;
+    color: #FBEFFE;
+    border-radius: 12px;
+}
+
+#task {
+    margin-top: 5rem;
+    font-size: 2rem;
+}
