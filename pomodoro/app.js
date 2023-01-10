@@ -13,6 +13,11 @@ const session = require("express-session");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+let SpotifyWebApi = require('spotify-web-api-js');
+
+const spotifyApi = new SpotifyWebApi();
+
+
 var app = express();
 
 // view engine setup
@@ -98,8 +103,15 @@ app.get('/spotify/callback', function(req, res){
       if (!error && response.statusCode === 200) {
         // Get an access token
         access_token = body.access_token;
+        console.log("--------------------------")
+        console.log("token",access_token);
+        console.log("--------------------------")
         // Save token in cookie
         res.cookie('spotify-access-token', access_token, {maxAge: 3600, httpOnly: true});
+        
+        // 拿到token先給spotifyApi
+        spotifyApi.setAccessToken(body.access_token);
+
         res.redirect('/');
         // console.log(access_token);
         // console.log(body);
@@ -119,6 +131,54 @@ app.get('/spotify/callback', function(req, res){
     });
   }
 });
+
+const play = (deviceID, token) => {
+  const playaURL = `https://api.spotify.com/v1/me/player/play?device_id=${data.device_id}`;
+  const d = { uris: ['spotify:track:5ya2gsaIhTkAuWYEMB0nw5'] };
+  fetch(playaURL, {
+    method: 'PUT',
+    body: JSON.stringify(d),
+    headers: new Headers({
+        Authorization: `Bearer ${token}`,
+    }),
+  })
+    .then((res) => res.json())
+    .catch((error) => console.error('Error:', error))
+    .then((response) => console.log('Success:', response));
+}
+
+if (access_token) {
+    window.onSpotifyPlayerAPIReady = () => {
+        const player = new Spotify.Player({
+            name: 'Web Playback SDK Template',
+            getOAuthToken: (cb) => {
+                cb(access_token);
+            },
+        });
+
+        // Error handling
+        player.on('initialization_error', (e) => console.error(e));
+        player.on('authentication_error', (e) => console.error(e));
+        player.on('account_error', (e) => console.error(e));
+        player.on('playback_error', (e) => console.error(e));
+
+        // Playback status updates
+        player.on('player_state_changed', (state) => {
+            console.log(state);
+        });
+
+        // Ready
+        player.on('ready', (data) => {
+            if (data.device_id) {
+                console.log('Ready with Device ID', data.device_id);
+                play(data.device_id, _token)
+            }
+        });
+
+        // Connect to the player!
+        player.connect();
+    };
+}
 
 // Refresh the access token
 app.get('/spotify/refresh_token', function(req, res) {
@@ -161,3 +221,13 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+//Call API => Token
+//Token => Cookie
+//Headers =>Auth
+
+//=> Token
+//Token => html variable
+
+//

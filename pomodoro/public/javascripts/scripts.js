@@ -64,9 +64,16 @@ function getCookie(cname) {
 
 window.onSpotifyWebPlaybackSDKReady = () => {
     const token = getCookie('spotify-access-token');
+
+    fetch(
+
+    ).then(token=>{
+        
+    })
+
     const player = new Spotify.Player({
       name: 'Kevin',
-      getOAuthToken: cb => { cb(token); },
+        getOAuthToken:cb =>{cb:token}
       volume: 0.5
     });
 
