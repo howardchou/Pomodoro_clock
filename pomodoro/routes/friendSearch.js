@@ -19,37 +19,21 @@ router.get("/:query", async (req, res)=> {
         title: 'friend search',
     });
     
-    // const { email, pw } = req.body;
-    // console.log(email);
-    // const member = await memberModel.findOne({ email });
-    // if (!member) {
-    //     console.log("member not found!!");
-    //     return res.redirect("login")
-    // }
-    // const verifyPW = await bcrypt.compare(pw, member.pw);
-    // if (!verifyPW) {
-    //     console.log("PW is incorrect!!");
-    //     return res.redirect("login");
-    // }
-    // console.log("logging success");
-    // req.session.isAuth=true;
-    // req.session.name = member.id;
-    // res.redirect("member");
-
-    // User.find(id).populate('friends');
-
-    // MongoClient.connect(DBUri,{useUnifiedTopology: true }, function (err, db) {
-    //     let dbo = db.db(mongodbUrl);
-    //     const query = {_id: objectId(req.params.id)}
-    //     dbo.collection("Users").find(query).toArray(function(err, resultTasks) {
+    // var searchfriend = req.body.searchfriend;
+    // if(searchfriend) {
+    //     var mssg= '';
+    //     if (searchfriend == req.user.username) {
+    //         searchfriend= null;
+    //     }
+    //     User.find({username: searchfriend}, function(err, result) {
     //         if (err) throw err;
-    //         res.render('../View/findFriend', {
-    //             resultTasks: resultTasks
+    //             res.render('search', {
+    //             "query": searchfriend,
+    //             result: result,
+    //             mssg : mssg
     //         });
-    //         db.close();
-    //     });
-    // });
-
+    //     });	
+    // }
 });
 
 module.exports = router;

@@ -11,12 +11,6 @@ block content
             //-     img.nav-icon-img(src="./images/icons/Search_icon.svg.png")
             //-     span.text-white 搜尋
             
-            .col.d-flex.justify-content-end
-                input.mx-2(type='type' style="height: 50px" placeholder='Search Friend' onkeypress='keypressInBox()')
-                button.btn.nav-icon(data-ripple type='button' onclick='onSearch()')
-                    img.nav-icon-img(src="../images/icons/Search_icon.svg.png" )
-                    span.text-white 搜尋 
-                    
             //- .container-fluid
             //-     .offset-md-3.col-md-6
             //-     ul.nav.nav-tabs
@@ -37,5 +31,5 @@ block content
                 .divTableRow
                     .divTableCell name
                         h1#search-results #{query}
-                        button.btn.nav-icon(data-ripple type='button' onclick='addFriend()')
+                        button.btn.nav-icon(data-ripple type='button' onclick='AddFriend()')
                             span#btnText.text-white 加好友
