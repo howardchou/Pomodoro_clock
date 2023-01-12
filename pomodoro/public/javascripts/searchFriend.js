@@ -9,6 +9,4 @@ function onSearch(button) {
 function addFriend() {
     console.log("addFriend");
     document.getElementById("btnText").innerHTML = '交友邀請已送出';
-    var query = this.query;
-    console.log(query);
 }
