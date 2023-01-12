@@ -5,7 +5,7 @@ block content
         .nav.row
             .col.d-flex
                 button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
-                    img.nav-icon-img(src='./images/icons/msg.svg')
+                    img.nav-icon-img(src='../images/icons/msg.svg')
             
             //- a.btn.nav-icon.mx-2(href="")
             //-     img.nav-icon-img(src="./images/icons/Search_icon.svg.png")
@@ -14,7 +14,7 @@ block content
             .col.d-flex.justify-content-end
                 input.mx-2(type='type' style="height: 50px" placeholder='Search Friend' onkeypress='keypressInBox()')
                 button.btn.nav-icon(data-ripple type='button' onclick='onSearch()')
-                    img.nav-icon-img(src="./images/icons/Search_icon.svg.png" )
+                    img.nav-icon-img(src="../images/icons/Search_icon.svg.png" )
                     span.text-white 搜尋 
                     
             //- .container-fluid
@@ -37,5 +37,5 @@ block content
                 .divTableRow
                     .divTableCell name
                         h1#search-results #{query}
-                        button.btn.nav-icon(data-ripple type='button' onclick='addFriend(this)')
+                        button.btn.nav-icon(data-ripple type='button' onclick='addFriend()')
                             span#btnText.text-white 加好友

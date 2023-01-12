@@ -14,7 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var sessionRouter = require('./routes/session');
 var friendRouter = require('./routes/friend');
-
+var friendSearchRouter = require('./routes/friendSearch');
 var accountRouter = require('./routes/account');
 
 var app = express();
@@ -58,6 +58,7 @@ app.use('/session', sessionRouter);
 app.use('/api', apiRouter);
 app.use('/friend', friendRouter);
 app.use('/account', accountRouter);
+app.use('/friendSearch', friendSearchRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));

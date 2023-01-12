@@ -11,11 +11,12 @@ router.get('', function (req, res, next) {
     // res.render('friend', { title: 'Friend' });
 });
 
-//already are friends
+//search user by username
 router.get("/:query", async (req, res)=> {
     var query = req.params.query;
-    res.render("search", {
+    res.render("friendSearch", {
         "query": query,
+        title: 'friend search',
     });
     
     // const { email, pw } = req.body;
