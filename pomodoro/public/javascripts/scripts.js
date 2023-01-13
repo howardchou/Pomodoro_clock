@@ -1,3 +1,19 @@
+// Spotify access token
+let access_token = null;
+
+// Check whether have logged in spotify account
+function spotifyLogin(){
+  // Haven't logged in
+  access_token = getCookie('spotify-access-token');
+  console.log("token: "+ access_token);
+  if(access_token == ''){
+    document.getElementById('spotify-login-btn').style.display = "block";
+  }
+  else{
+    document.getElementById('spotify-login-btn').style.display = "none";
+  }
+}
+
 // Get playing status
 function getCurrentState(player, which){
     player.getCurrentState().then(state => {
@@ -63,14 +79,7 @@ function getCookie(cname) {
 }
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-    const token = getCookie('spotify-access-token');
-
-    fetch(
-
-    ).then(token=>{
-        
-    })
-
+    const token = access_token;
     const player = new Spotify.Player({
       name: 'Kevin',
         getOAuthToken:cb =>{cb:token}
