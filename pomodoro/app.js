@@ -1,12 +1,16 @@
+// Require env, get env's data
+require('dotenv').config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require("dotenv").config();
+
+// Using session
+const session = require("express-session");
 const mongoose = require('mongoose');
 const mongoStore = require('connect-mongo');
-const session = require('express-session');
 
 
 var apiRouter = require('./routes/api');
@@ -14,9 +18,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var sessionRouter = require('./routes/session');
 var friendRouter = require('./routes/friend');
-
 var accountRouter = require('./routes/account');
-
+var spotifyRouter = require('./routes/spotify');
 var app = express();
 
 //連線
@@ -54,6 +57,7 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/spotify', spotifyRouter);
 app.use('/session', sessionRouter);
 app.use('/api', apiRouter);
 app.use('/friend', friendRouter);
@@ -74,3 +78,13 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+//Call API => Token
+//Token => Cookie
+//Headers =>Auth
+
+//=> Token
+//Token => html variable
+
+//

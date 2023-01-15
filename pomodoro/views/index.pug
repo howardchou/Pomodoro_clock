@@ -1,53 +1,6 @@
 extends layout
 
 block content
-  // google font
-  link(rel='preconnect' href='https://fonts.googleapis.com')
-  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
-  link(href='https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap' rel='stylesheet')
-  // icon
-  script(src='https://kit.fontawesome.com/4d9283736a.js' crossorigin='anonymous')
-  // css
-  link(rel='stylesheet' href='/stylesheets/index.css')
-  // jQuery
-  script(src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js") 
-  
   button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
         img.nav-icon-img(src='./images/icons/msg.svg')
-  section
-    .containerIndex
-      //- h1 Pomodoro
-      .painel
-        p#work Work
-        p#break Break
-      .timer
-        .circle
-          .time
-            p#minutes 25
-            p :
-            p#seconds 00
-      .controls
-        button.btn#btn(type='button' onclick='countdownToggle()') Start
-        a#reset(href='/')
-          i.fa-solid.fa-rotate-right
-
-  section
-    //.container.border.bg-light
-  .row
-    .col-sm
-      h1.text-center#task Task
-  .row.justify-content-center
-    .col-sm-5
-      .input-group.mb-3
-        .input-group-prepend
-          span#basic-addon1.input-group-text &#x4EFB;&#x52D9;
-        input#title.form-control(type='text' name='title' placeholder='標題')
-      .row.m-2.justify-content-center.maincontent
-      .row.m-2.justify-content-center
-        input#addbtn.btn(type='button' value='確認')
-
-   
-  // SCRIPT
-  script(src='/javascripts/index.js')
-  script(src='/javascripts/todolist.js')
 
