@@ -1,6 +1,33 @@
 extends layout
 
 block content
+  // google font
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap' rel='stylesheet')
+  // icon
+  script(src='https://kit.fontawesome.com/4d9283736a.js' crossorigin='anonymous')
+  // css
+  link(rel='stylesheet' href='/stylesheets/index.css')
+
   button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
         img.nav-icon-img(src='./images/icons/msg.svg')
-
+  section
+    .containerIndex
+      //- h1 Pomodoro
+      .painel
+        p#work Work
+        p#break Break
+      .timer
+        .circle
+          .time
+            p#minutes 25
+            p :
+            p#seconds 00
+      .controls
+        button#start(onclick='countdownToggle()')
+          i.fa-solid.fa-play
+        a#reset(href='/')
+          i.fa-solid.fa-rotate-right
+  // SCRIPT
+  script(src='/javascripts/index.js')
