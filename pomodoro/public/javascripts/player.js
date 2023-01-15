@@ -53,13 +53,46 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         console.log("The Web Playback SDK successfully connected to Spotify!");
       }
     });
-  
-    // Toggle Play Button
-    document.getElementById("togglePlay").onclick = function () {
-        console.log("click");
-      player.togglePlay();
+
+    // Play toggle
+    document.getElementById('togglePlay').onclick = function() {
+        player.togglePlay().then(() => {
+            console.log('Toggled playback!');
+            document.getElementById('play').src = document.getElementById('play').src ==
+             'http://127.0.0.1:3000/images/icons/icons8-play-button-circled.svg' ?
+            '/images/icons/pause.svg' : '/images/icons/icons8-play-button-circled.svg';
+        }).then(() => {
+             // Update playing content info
+            getCurrentState(player, 1);
+        });
+        // Update playing content info
+        getCurrentState(player, 1);
+       
     };
-  
+    
+    // Play previous song
+    document.getElementById('previous').onclick = function(){
+        player.previousTrack().then(() => {
+            console.log('Set to previous track!');
+        }).then(() => {
+            // Update playing content info
+            getCurrentState(player, 0);
+        });
+        // Update playing content info
+        getCurrentState(player, 0);
+    }
+
+    // Play next song
+    document.getElementById('next').onclick = function(){
+        player.nextTrack().then(() => {
+            console.log('Skipped to next track!');
+        }).then(() => {
+            // Update playing content info
+            getCurrentState(player, 2);
+        });
+        // Update playing content info
+        getCurrentState(player, 2);
+    }
   };
   
   // Play selected song
@@ -78,3 +111,48 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         }
       ).then((data) => console.log(data));
     };
+
+  // Get playing status
+function getCurrentState(player, which){
+    player.getCurrentState().then(state => {
+        if (!state) {
+          console.error('User is not playing music through the Web Playback SDK');
+          return;
+        }
+    
+        var current_track = state.track_window.current_track;
+        var next_track = state.track_window.next_tracks[0];
+        var previous_track = state.track_window.previous_tracks[1];
+        
+        // Update playing song name
+        document.getElementById('playing-name').innerText = current_track.name;
+        // Update playing album img
+        switch(which){
+            // Previous
+            case 0:
+                document.getElementById('playing-name').innerText
+                 = previous_track.name;
+                document.getElementById('album').src
+                 = previous_track.album.images[1].url;
+                break;
+            // Current
+            case 1:
+                document.getElementById('playing-name').innerText
+                 = current_track.name;
+                document.getElementById('album').src
+                 = current_track.album.images[1].url;
+                break;
+            // Next
+            case 2:
+                document.getElementById('playing-name').innerText
+                 = next_track.name;
+                document.getElementById('album').src
+                 = next_track.album.images[1].url;
+                break;
+        }
+        
+        // console.log(state.track_window);
+        // console.log('Currently Playing', current_track);
+        // console.log('Playing Next', next_track);
+    });
+}
