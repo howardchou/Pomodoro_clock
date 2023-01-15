@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'PomoClock' });
+  if(req.session.isAuth){
+    res.render('index', { title: 'PomoClock' });
+  }else{
+    res.render('login');
+  }
+  
+  // res.render('index', { title: 'PomoClock' });
 });
 
 module.exports = router;

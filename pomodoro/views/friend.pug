@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    .container
+        .nav.row
+            .col.d-flex
+                button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
+                    img.nav-icon-img(src='./images/icons/msg.svg')
+            
+            //- a.btn.nav-icon.mx-2(href="")
+            //-     img.nav-icon-img(src="./images/icons/Search_icon.svg.png")
+            //-     span.text-white 搜尋
+            
+            .col.d-flex.justify-content-end
+                input.mx-2(type='type' style="height: 50px" placeholder='Search Friend' onkeypress='keypressInBox()')
+                button.btn.nav-icon(data-ripple type='button' onclick='onSearch(this)')
+                    img.nav-icon-img(src="./images/icons/Search_icon.svg.png" )
+                    span.text-white 搜尋
+        .div(style='display: flex; justify-content: center;')        
+            .divContainer(style='width: 60%; border: 1px solid #000;align: center; text-align: center; ')
+                .divTableBody
+                    .divTableRow(style= 'border:0 px #000;')
+                        h1.divTableCell friend
+
+                    .divTableRow
+                        .divTableCell#friendList(style='display: flex; justify-content: center;') 
+                            .divContainer(style='width: 60%; border: 1px solid #000;align: center; text-align: center; ')
+                                .divTableBody
+                                    .div#friendList friendList

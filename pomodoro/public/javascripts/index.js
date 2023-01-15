@@ -1,51 +1,53 @@
 let workTittle = document.getElementById('work');
 let breakTittle = document.getElementById('break');
 
-let workTime = 1;
-let breakTime = 1;
-let isPaused=false;
+let workTime = 25;
+let breakTime = 5;
+let isPaused = false;
 let isStart = false;
 let seconds = "00"
 
-// display
+// 顯示
 window.onload = () => {
-    
+
     document.getElementById('minutes').innerHTML = workTime;
     document.getElementById('seconds').innerHTML = seconds;
 
     workTittle.classList.add('active');
 }
 
-// start timer
+// 啟動
 function start() {
-    // change button
-    // document.getElementById('start').style.display = "none";
-    // document.getElementById('reset').style.display = "block";
-    
-
-
-    // change the time
+    console.log("start");
     seconds = 59;
-
     let workMinutes = workTime - 1;
     let breakMinutes = breakTime - 1;
-
     breakCount = 0;
 
-    // countdown
+    //倒數計時器
     let timerFunction = () => {
-        //change the display
+        console.log("timerFunction");
+        //倒數時間
         document.getElementById('minutes').innerHTML = workMinutes;
         document.getElementById('seconds').innerHTML = seconds;
-
+        if (workMinutes < 10) {
+            document.getElementById('minutes').innerHTML = `0${workMinutes}`
+        }
+        if (seconds < 10) {
+            document.getElementById('seconds').innerHTML = `0${seconds}`
+        }
         // start
         seconds = seconds - 1;
 
         if (seconds === 0) {
             workMinutes = workMinutes - 1;
             if (workMinutes === -1) {
+                isPaused = true;
+                document.getElementById('btn').innerHTML = "Break";
+                document.getElementById('seconds').innerHTML = "00";
                 if (breakCount % 2 === 0) {
                     // start break
+                    alert("結束番茄，準備休息囉");
                     workMinutes = breakMinutes;
                     breakCount++
 
@@ -54,39 +56,49 @@ function start() {
                     breakTittle.classList.add('active');
                 } else {
                     // continue work
+                    alert("休息時間結束，上工囉");
                     workMinutes = workTime;
                     breakCount++
 
                     // change the painel
                     breakTittle.classList.remove('active');
                     workTittle.classList.add('active');
+                    document.getElementById('minutes').innerHTML = workTime;
+                    document.getElementById('btn').innerHTML = "Start";
                 }
             }
             seconds = 59;
         }
     }
 
-    // start countdown
-    // setInterval(timerFunction, 1000); // 1000 = 1s
-
     setInterval(function() {
-        if(!isPaused) {
+        console.log("setInterval" + isPaused);
+        if (!isPaused) {
             timerFunction();
         }
     }, 1000);
-    // function play(){
-    //     isPaused = false;
-    // }
-    // function pause(){
-    //     isPaused = true;
-    // }
 }
-function countdownToggle(){
-    if(!isStart){
+
+function countdownToggle() {
+    console.log("countdownToggle 1" + isPaused);
+    if (!isStart) {
+        document.getElementById('btn').innerHTML = "Pause";
         start();
-        isStart =! isStart;
-        isPaused =! isPaused;
+        isStart = !isStart;
+        isPaused = !isPaused; //第一次Pause false=>true
+        document.body.style.backgroundColor = '#c4604d';
     }
-    isPaused =! isPaused;
-    // start();
+    isPaused = !isPaused;
+    if (isPaused) {
+        document.getElementById('btn').innerHTML = "Start";
+        document.body.style.backgroundColor = '#CD533B';
+        // isPaused = !isPaused; //第一次Pause false=>true
+    }
+    if (!isPaused) {
+        document.getElementById('btn').innerHTML = "Pause";
+        document.body.style.backgroundColor = '#c4604d';
+        // isPaused = !isPaused; //第一次Pause false=>true
+    }
+
+    console.log("countdownToggle 2" + isPaused);
 }
