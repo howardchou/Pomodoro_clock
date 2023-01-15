@@ -10,8 +10,6 @@ $().ready(function(){
     // If the user not logging
     // let token = localStorage.getItem('spotify_token');
     let token = getCookie("spotify_token");
-
-    console.log("token: ", token);
     
     // If not login
     if(token == null || token == ""){
@@ -23,7 +21,7 @@ $().ready(function(){
             'id="#spotify-login-btn"' + 
             'onclick="userLogInRequest();">'+
             'Spotify Login '+'</button>' +
-            
+            '<br>'+
             '<p>Only available for Spotify Premiere account!</p>'
         );
     }
@@ -31,7 +29,7 @@ $().ready(function(){
     else{
         $('#spotifyContent').append(
             '<h1>Login success!</h1>'+
-            '<button id="togglePlay">Toggle Play</button>'+
+            // '<button id="togglePlay">Toggle Play</button>'+
             '<button id="spotifyLogout">Logout</button>'
         );
         // Add play SDK
