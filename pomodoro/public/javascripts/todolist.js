@@ -34,18 +34,14 @@ function newList(data) {
     //if else 檢查有沒有打勾 x=delete
     let a = "1";
     let content =
-        `<div class="input-group mb-2 bg-light rounded-1" id="${data.id}">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <input type="checkbox" class="myCheck" onclick="checkStatus('${data.id}',this)">
-                </div>
+        `<div class="input-group mb-2 rounded-1" id="${data.id}">
+            <div class="input-group-text">
+                <input type="checkbox" class="myCheck" onclick="checkStatus('${data.id}',this)">
             </div>
             <input type="text" class="form-control col-sm-3 " id="title${data.id}" value="${data.title}" readonly>
-            <div class="input-group-append" id="button-addon4">
-                <button class="btn btn-outline-secondary" type="button" id="btnEdit${data.id}"onclick="editList('${data.id}')">修改</button>
-                <button class="btn btn-outline-secondary" type="button" id="btnUpdate${data.id}"onclick="updateList('${data.id}')">更新</button>
-                <button class="btn btn-outline-secondary" type="button" id="btnRemove${data.id}" onclick="removeList('${data.id}')">刪除</button>
-            </div>
+            <button class="btn btn-outline-secondary bg-light" type="button" id="btnEdit${data.id}"onclick="editList('${data.id}')">修改</button>
+            <button class="btn btn-outline-secondary bg-light" type="button" id="btnUpdate${data.id}"onclick="updateList('${data.id}')">更新</button>
+            <button class="btn btn-outline-secondary bg-light" type="button" id="btnRemove${data.id}" onclick="removeList('${data.id}')">刪除</button>
         </div>`
     $('.maincontent').append(content);
 }

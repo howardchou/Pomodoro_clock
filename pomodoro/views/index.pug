@@ -30,18 +30,17 @@ block content
 
   section
     //.container.border.bg-light
-  .row
+  .row.mb-4
     .col-sm
       h1.text-center#task Task
   .row.justify-content-center
-    .col-sm-5
+    .col-sm-10.col-lg-5
       .input-group.mb-3
-        .input-group-prepend
-          span#basic-addon1.input-group-text &#x4EFB;&#x52D9;
+        .input-group-text
+          span#basic-addon1 &#x4EFB;&#x52D9;
         input#title.form-control(type='text' name='title' placeholder='標題')
-      .row.m-2.justify-content-center.maincontent
-      .row.m-2.justify-content-center
-        input#addbtn.btn(type='button' value='確認')
+        input#addbtn.btn(type='button' value='新增')
+      .row.justify-content-center.maincontent
 
   button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
       img.nav-icon-img(src='./images/icons/msg.svg')

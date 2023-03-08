@@ -114,10 +114,12 @@ section {
     position: relative;
     display: flex;
     flex-direction: row;
+    margin-top: 1rem;
 }
 
 .time p {
     font-size: 3rem;
+    margin-bottom: 0.7rem;
 }
 
 .time p:nth-of-type(2) {
@@ -151,10 +153,8 @@ section {
     background-color: #f37157;
     font-size: 1rem;
     color: #FBEFFE;
-    border-radius: 12px;
 }
 
 #task {
-    margin-top: 5rem;
     font-size: 2rem;
 }
