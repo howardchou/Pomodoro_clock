@@ -10,8 +10,6 @@ block content
   // css
   link(rel='stylesheet' href='/stylesheets/index.css')
 
-  button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
-        img.nav-icon-img(src='./images/icons/msg.svg')
   section
     .containerIndex
       //- h1 Pomodoro
@@ -24,12 +22,12 @@ block content
             p#minutes 25
             p :
             p#seconds 00
+          button#start(onclick='countdownToggle()')
+            i.fa-solid.fa-play.position-relative
       .controls
-        button#start(onclick='countdownToggle()')
-          i.fa-solid.fa-play
         a#reset(href='/')
           i.fa-solid.fa-rotate-right
-          
+
   section
     //.container.border.bg-light
   .row
@@ -44,6 +42,9 @@ block content
       .row.m-2.justify-content-center.maincontent
       .row.m-2.justify-content-center
         input#addbtn.btn(type='button' value='確認')
+
+  button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
+      img.nav-icon-img(src='./images/icons/msg.svg')
   // SCRIPT
   script(src='/javascripts/index.js')
   script(src='/javascripts/todolist.js')

@@ -142,4 +142,3 @@ function checkStatus(id, checkStatus) {
     });
 
 }
-console.log("HI")
