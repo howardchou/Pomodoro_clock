@@ -10,8 +10,6 @@ block content
   // css
   link(rel='stylesheet' href='/stylesheets/index.css')
 
-  button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
-        img.nav-icon-img(src='./images/icons/msg.svg')
   section
     .containerIndex
       //- h1 Pomodoro
@@ -24,10 +22,28 @@ block content
             p#minutes 25
             p :
             p#seconds 00
+          button#start(onclick='countdownToggle()')
+            i.fa-solid.fa-play.position-relative
       .controls
-        button#start(onclick='countdownToggle()')
-          i.fa-solid.fa-play
         a#reset(href='/')
           i.fa-solid.fa-rotate-right
+
+  section
+    //.container.border.bg-light
+  .row.mb-4
+    .col-sm
+      h1.text-center#task Task
+  .row.justify-content-center
+    .col-sm-10.col-lg-5
+      .input-group.mb-3
+        .input-group-text
+          span#basic-addon1 &#x4EFB;&#x52D9;
+        input#title.form-control(type='text' name='title' placeholder='標題')
+        input#addbtn.btn(type='button' value='新增')
+      .row.justify-content-center.maincontent
+
+  button.btn.nav-icon.rounded-circle.ms-auto(type:button, style="height: 56px")
+      img.nav-icon-img(src='./images/icons/msg.svg')
   // SCRIPT
   script(src='/javascripts/index.js')
+  script(src='/javascripts/todolist.js')
